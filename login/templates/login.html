@@ -13,21 +13,28 @@
                     url: '/userlogin/',
                     type: 'POST',
                     data: {
-                        username: $("#username").val(),
+                        account: $("#account").val(),
                         password: $("#password").val()
                     },
-                    dataType: 'json'
+                    dataType: 'json',
+                    success: loginResult
                 })
+            }
+
+            function loginResult(data) {
+                if (data.result) {
+                    location.href = "/";
+                }
             }
         </script>
     </head>
 
     <body>
         <div class="input-group mb-3" style="width: 300px">
-            <input type="text" id="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            <input type="text" id="account" class="form-control" placeholder="Account" aria-label="Account" aria-describedby="basic-addon1" value="user1">
         </div>
         <div class="input-group mb-3" style="width: 300px">
-            <input type="password" id="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+            <input type="password" id="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" value="password1">
         </div>
         <button type="button" class="btn btn-primary" onclick="login()">登录</button>
         <button type="button" class="btn btn-secondary">注册</button>

@@ -13,19 +13,30 @@
                     url: '/userregister/',
                     type: 'POST',
                     data: {
-                        username: $("#username").val(),
+                        account: $("#account").val(),
+                        name:  $("#name").val(),
                         password: $("#password").val(),
                         email: $("#email").val()
                     },
-                    dataType: 'json'
+                    dataType: 'json',
+                    success: registerResult
                 })
+            }
+
+            function registerResult(data) {
+                if (data.result) {
+                    location.href = "/login";
+                }
             }
         </script>
     </head>
 
     <body>
         <div class="input-group mb-3" style="width: 300px">
-            <input type="text" id="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            <input type="text" id="account" class="form-control" placeholder="Account" aria-label="Account" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3" style="width: 300px">
+            <input type="text" id="name" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1">
         </div>
         <div class="input-group mb-3" style="width: 300px">
             <input type="password" id="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">

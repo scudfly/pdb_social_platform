@@ -13,9 +13,13 @@ class LoginConfig(AppConfig):
         if not table_exists:
             conn.execute('''CREATE TABLE user
                         (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        account TEXT NOT NULL,
                         name TEXT NOT NULL,
                         email TEXT NOT NULL,
                         password TEXT NOT NULL);''')
-            print("User table created")
+            conn.execute("INSERT INTO user (account, name, email, password) VALUES (?, ?, ?, ?)", ('user1', 'Abbot', 'user1@example.com', 'password1'))
+            conn.execute("INSERT INTO user (account, name, email, password) VALUES (?, ?, ?, ?)", ('user2', 'Patricia', 'user2@example.com', 'password2'))
+            conn.execute("INSERT INTO user (account, name, email, password) VALUES (?, ?, ?, ?)", ('user3', 'Acheson', 'user2@example.com', 'password3'))
+            conn.commit()
             
         conn.close()
