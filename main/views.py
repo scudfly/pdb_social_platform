@@ -11,12 +11,23 @@ def index(request):
         return redirect(reverse('login'))
 
     conn = sqlite3.connect('db.sqlite3')
-    cursor = conn.execute("SELECT u.name, p.content, p.datetime FROM post p JOIN user u ON p.userid = u.id ORDER BY p.datetime DESC LIMIT 10;")
+    cursor = conn.execute('''
+    SELECT u.name, p.content, p.datetime, f.id, u.id = ?
+    FROM post p 
+    JOIN user u ON p.userid = u.id
+    LEFT JOIN focus f ON f.userid = ? AND f.focusid = u.id
+    ORDER BY p.datetime DESC LIMIT 10;''', (userid, userid,))
     rows = cursor.fetchall()
     cursor.close()
     conn.close()
     
     return render(request, "index.html", {"data_list": rows})
+
+def trend(request):
+    return render(request, "trend.html")
+
+def focus(request):
+    return render(request, "focus.html")
 
 def post(request):
     userid = request.session.get('userid')
