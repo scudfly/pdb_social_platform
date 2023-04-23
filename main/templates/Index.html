@@ -4,23 +4,28 @@
 {% block title %}首页{% endblock %}
 
 {% block extra_head %}
-    <style>
-        
-    </style>
-    <script>
-        function register() {
-            $.ajax({
-                url: '/userregister/',
-                type: 'POST',
-                data: {
-                    username: $("#username").val(),
-                    password: $("#password").val(),
-                    email: $("#email").val()
-                },
-                dataType: 'json'
-            })
+<style>
+
+</style>
+<script>
+    function focusUser(userid) {
+        $.ajax({
+            url: '/focus_user/',
+            type: 'POST',
+            data: {
+                focususerid: userid
+            },
+            dataType: 'json',
+            success: (data) => focusResult(data, userid)
+        })
+    }
+
+    function focusResult(data, userid) {
+        if (data.result) {
+            $("<div>已关注</div>").replaceAll("[userid='"+userid+"']");
         }
-    </script>
+    }
+</script>
 {% endblock %}
 
 {% block content %}

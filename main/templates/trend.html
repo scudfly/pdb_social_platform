@@ -4,25 +4,15 @@
 {% block title %}动态{% endblock %}
 
 {% block extra_head %}
-    <style>
-        
-    </style>
-    <script>
-        function register() {
-            $.ajax({
-                url: '/userregister/',
-                type: 'POST',
-                data: {
-                    username: $("#username").val(),
-                    password: $("#password").val(),
-                    email: $("#email").val()
-                },
-                dataType: 'json'
-            })
-        }
-    </script>
+<style>
+
+</style>
+<script>
+</script>
 {% endblock %}
 
 {% block content %}
-
+    {% for item in data_list %}
+        {% post_item item %}
+    {% endfor %}
 {% endblock %}

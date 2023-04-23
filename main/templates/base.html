@@ -9,9 +9,6 @@
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
         {% block extra_head %}{% endblock %}
         <style>
-            .navigation {
-
-            }
             .btn-light {
                 background-color: #e8eaed;
             }
@@ -24,30 +21,65 @@
                 border-left: 1px rgb(239, 243, 244) solid;
                 border-right: 1px rgb(239, 243, 244) solid;
                 height: calc(100vh);
+                overflow-y: auto;
+            }
+            .main-wapper::-webkit-scrollbar {
+                width:5px;
+            }
+            .main-wapper::-webkit-scrollbar-thumb{
+                background:#c1c1c1;
+                border-radius:4px;
+            }
+            .post-item {
+                border-bottom: 1px rgb(239, 243, 244) solid;
+                padding: 20px;
+            }
+            .post-item:hover {
+                background-color: #f7f7f7;
+            }
+            .post-item-title {
+                height:40px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
             }
         </style>
         <script>
-            function register() {
+            function logout() {
                 $.ajax({
-                    url: '/userregister/',
+                    url: '/logout/',
                     type: 'POST',
                     data: {
-                        username: $("#username").val(),
-                        password: $("#password").val(),
-                        email: $("#email").val()
                     },
-                    dataType: 'json'
+                    dataType: 'json',
+                    success: logoutResult
                 })
+            }
+
+            function logoutResult(data) {
+                if (data.result) {
+                    location.href = "/login/";
+                }
             }
         </script>
     </head>
 
     <body>
         <div style="display:flex;flex-direction: row;justify-content: center;">
-            <div style="display:flex;flex-direction: column;justify-content: center;width: 150px;">
-                <button type="button" class="{% if request.path != '/' %}navigation-item{% endif %} btn btn-light" onclick="location.href='/'">首页</button>
-                <button type="button" class="{% if request.path != '/trend/' %}navigation-item{% endif %} btn btn-light" onclick="location.href='/trend'">动态</button>
-                <button type="button" class="{% if request.path != '/focus/' %}navigation-item{% endif %} btn btn-light" onclick="location.href='/focus'">关注</button>
+            <div style="display:flex;flex-direction: column;justify-content: center;width: 200px;">
+                <div style="flex-shrink: 0;text-align: center; padding-top: 30px;">
+                    <img style="border-radius: 10px;" src="{% static 'img/pdb_logo.png' %}" />
+                </div>
+                <div style="display:flex;flex-direction: column;justify-content: center;flex-grow: 2;">
+                    <button type="button" class="{% if request.path != '/' %}navigation-item{% endif %} btn btn-light" onclick="location.href='/'">首页</button>
+                    <button type="button" class="{% if request.path != '/trend/' %}navigation-item{% endif %} btn btn-light" onclick="location.href='/trend'">动态</button>
+                    <button type="button" class="{% if request.path != '/focus/' %}navigation-item{% endif %} btn btn-light" onclick="location.href='/focus'">关注</button>
+                    <button type="button" class="{% if request.path != '/post/' %}navigation-item{% endif %} btn btn-light" onclick="location.href='/post'">发布</button>
+                </div>
+                <div style="display:flex;flex-direction: column;justify-content: center;flex-shrink: 0;padding-bottom: 30px;">
+                    <button type="button" class="navigation-item btn btn-light" onclick="logout()">注销</button>
+                </div>                
             </div>
             <div class="main-wapper">
                 {% block content %}

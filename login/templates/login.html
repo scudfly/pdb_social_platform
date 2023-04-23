@@ -7,6 +7,15 @@
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
         <script src="{% static 'js/jquery-3.6.4.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: calc(100vh);
+            }
+        </style>
         <script>
             function login() {
                 $.ajax({
@@ -30,13 +39,23 @@
     </head>
 
     <body>
-        <div class="input-group mb-3" style="width: 300px">
-            <input type="text" id="account" class="form-control" placeholder="Account" aria-label="Account" aria-describedby="basic-addon1" value="user1">
+        <div style="display: flex;">
+            <div>
+                <img style="border-radius: 10px;" src="{% static 'img/pdb_logo_big.png' %}" />
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: center; margin-left: 50px;">
+                <div class="input-group mb-3" style="width: 300px">
+                    <input type="text" id="account" class="form-control" placeholder="Account" aria-label="Account" aria-describedby="basic-addon1" value="user1">
+                </div>
+                <div class="input-group mb-3" style="width: 300px">
+                    <input type="password" id="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" value="password1">
+                </div>
+                <div style="text-align: center;">
+                    <button type="button" class="btn btn-primary" onclick="login()">登录</button>
+                    <button type="button" class="btn btn-secondary" onclick="location.href='/register'">注册</button>
+                </div>
+            </div>
         </div>
-        <div class="input-group mb-3" style="width: 300px">
-            <input type="password" id="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" value="password1">
-        </div>
-        <button type="button" class="btn btn-primary" onclick="login()">登录</button>
-        <button type="button" class="btn btn-secondary">注册</button>
+
     </body>
 </html>

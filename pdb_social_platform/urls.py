@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from login.views import login, userlogin, register, userregister
-from main.views import index, post, postContent, trend, focus
+from main.views import index, post, postContent, trend, focus, focus_user, unfocus_user,logout
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -30,4 +30,7 @@ urlpatterns = [
     path("postContent/", postContent, name="postContent"),
     path("trend/", trend, name="trend"),
     path("focus/", focus, name="focus"),
+    path("focus_user/", focus_user, name="focus_user"),
+    path("unfocus_user/", unfocus_user, name="unfocus_user"),
+    path("logout/", logout, name="logout"),
 ]

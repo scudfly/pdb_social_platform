@@ -1,28 +1,54 @@
 {% extends "base.html" %}
-{% load post_item %}
 
 {% block title %}关注{% endblock %}
 
 {% block extra_head %}
     <style>
-        
+        .focus_item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            border-bottom: 1px rgb(239, 243, 244) solid;
+        }
+        .focus_item_name {
+            font-size: 20px;
+            font-weight: 700;
+        }
     </style>
     <script>
-        function register() {
+        function focusUser(userid, element) {
+
+            var url = $(element).text() == "关注" ? "/focus_user/" : "/unfocus_user/";
+
             $.ajax({
-                url: '/userregister/',
+                url: url,
                 type: 'POST',
                 data: {
-                    username: $("#username").val(),
-                    password: $("#password").val(),
-                    email: $("#email").val()
+                    focususerid: userid
                 },
-                dataType: 'json'
+                dataType: 'json',
+                success: (data) => focusResult(data, userid, element)
             })
+        }
+
+        function focusResult(data, userid, element) {
+            if (data.result) {
+                $(element).text($(element).text() == "关注" ? "取消关注" : "关注");
+            }
         }
     </script>
 {% endblock %}
 
 {% block content %}
-
+    {% for item in data_list %}
+        <div class="focus_item">
+            <div class="focus_item_name">
+                {{ item.1 }}
+            </div>
+            <div>
+                <button type="button" class="btn btn-dark" style="border-radius: 30px; width: 100px" onclick="focusUser('{{ item.0 }}', this)">取消关注</button>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}

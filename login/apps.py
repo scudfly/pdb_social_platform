@@ -19,7 +19,8 @@ class LoginConfig(AppConfig):
                         password TEXT NOT NULL);''')
             conn.execute("INSERT INTO user (account, name, email, password) VALUES (?, ?, ?, ?)", ('user1', '博物杂志', 'user1@example.com', 'password1'))
             conn.execute("INSERT INTO user (account, name, email, password) VALUES (?, ?, ?, ?)", ('user2', '中国国家地理', 'user2@example.com', 'password2'))
-            conn.execute("INSERT INTO user (account, name, email, password) VALUES (?, ?, ?, ?)", ('user3', '历史研究院', 'user2@example.com', 'password3'))
+            conn.execute("INSERT INTO user (account, name, email, password) VALUES (?, ?, ?, ?)", ('user3', '历史研究院', 'user3@example.com', 'password3'))
+            conn.execute("INSERT INTO user (account, name, email, password) VALUES (?, ?, ?, ?)", ('user4', '中国考古博物馆', 'user4@example.com', 'password4'))
             conn.commit()
             
         conn.close()
