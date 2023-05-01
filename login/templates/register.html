@@ -18,6 +18,17 @@
         </style>
         <script>
             function register() {
+
+                var accout = $("#account").val();
+                var name = $("#name").val();
+                var password = $("#password").val();
+                var email = $("#email").val();
+
+                if (!accout || !name || !password || !email) {
+                    alert("信息不完整，请完整填写信息");
+                    return;
+                }
+
                 $.ajax({
                     url: '/userregister/',
                     type: 'POST',
@@ -35,6 +46,9 @@
             function registerResult(data) {
                 if (data.result) {
                     location.href = "/login";
+                }
+                else {
+                    alert("用户名已存在，注册失败");
                 }
             }
         </script>

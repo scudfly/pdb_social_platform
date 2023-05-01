@@ -38,7 +38,7 @@ def userregister(request):
 def check_and_insert_user(account, name, email, password):
     conn = sqlite3.connect('db.sqlite3')
 
-    cursor = conn.execute("SELECT name FROM user WHERE name = ?", (name,))
+    cursor = conn.execute("SELECT account FROM user WHERE account = ?", (account,))
     user_exists = cursor.fetchone() is not None
 
     inserted = False

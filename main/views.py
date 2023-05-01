@@ -12,7 +12,7 @@ def index(request):
 
     conn = sqlite3.connect('db.sqlite3')
     cursor = conn.execute('''
-    SELECT u.name, p.content, p.datetime, f.id, u.id = ?, u.id
+    SELECT u.name, p.content, p.datetime, f.id, u.id = ?, u.id, u.account
     FROM post p 
     JOIN user u ON p.userid = u.id
     LEFT JOIN focus f ON f.userid = ? AND f.focusid = u.id
@@ -30,7 +30,7 @@ def trend(request):
 
     conn = sqlite3.connect('db.sqlite3')
     cursor = conn.execute('''
-    SELECT u.name, p.content, p.datetime, f.id as fid, u.id = ? as uid, u.id
+    SELECT u.name, p.content, p.datetime, f.id as fid, u.id = ? as uid, u.id, u.account
     FROM post p 
     JOIN user u ON p.userid = u.id
     LEFT JOIN focus f ON f.userid = ? AND f.focusid = u.id
